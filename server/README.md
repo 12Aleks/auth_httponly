@@ -1,7 +1,7 @@
 # Server
 
 **Version:** 0.0.1  
-**Author:** Your Name  
+**Author:** O Koba
 
 ## Description
 Backend for a test application built with **NestJS** and **TypeScript**.  
