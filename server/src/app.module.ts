@@ -7,6 +7,7 @@ import configuration from "../config/configuration";
 import {validation} from "../config/validation";
 
 
+
 @Module({
   imports: [
      ConfigModule.forRoot({
@@ -24,7 +25,7 @@ import {validation} from "../config/validation";
              username: configService.get<string>('db_user'),
              password: configService.get<string>('db_pass'),
              database: configService.get<string>('db_name'),
-             entities: [],
+             entities: [__dirname + '/**/*.entity{.ts,.js}'],
              synchronize: true,
          })
       }),
