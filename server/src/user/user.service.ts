@@ -30,4 +30,8 @@ export class UserService {
     async getUserByEmail(email: string): Promise<User | null>{
         return this.userRepository.findOne({where: {email}});
     }
+
+    async getAllUsers(): Promise<User[]> {
+        return this.userRepository.find();
+    }
 }
