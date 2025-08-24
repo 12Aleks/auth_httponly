@@ -16,15 +16,15 @@ export class AuthController {
 
         res.cookie('accessToken', token.accessToken, {
             httpOnly: true,
+            sameSite: 'lax',
             secure: false, // true, but in the test version false
-            sameSite: 'none',
             maxAge: 15 * 60 * 1000,
         });
 
         res.cookie('refreshToken', token.refreshToken, {
             httpOnly: true,
+            sameSite: 'lax',
             secure: false, // true, but in the test version false
-            sameSite: 'strict',
             maxAge: 7 * 24 * 60 * 60 * 1000,
         })
 
