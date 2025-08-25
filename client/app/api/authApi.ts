@@ -5,14 +5,22 @@ import {api} from "@/app/api/axiosInitial";
 export const authApi = {
     login: async (dto: IAuthDto) => {
         const res = await api.post('/auth/login', dto);
-        return res.data;
+        return res;
     },
     logout: async () => {
         const res = await api.post('/auth/logout');
-        return res.data;
+        return res;
     },
-    register: async () => {
-        const res = await api.post('/auth/register');
-        return res.data;
+    register: async (dto: IAuthDto, role: string = 'user') => {
+        const res = await api.post('/auth/register', {
+            ...dto,
+            role
+        });
+        return res;
+    },
+    isLogin: async () => {
+        const res = await api.get('/users/profile');
+        console.log(res);
+        return res;
     }
 }

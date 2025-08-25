@@ -1,3 +1,5 @@
+import {AxiosResponse} from "axios";
+
 export interface IAuthDto {
     email: string,
     password: string
@@ -5,11 +7,13 @@ export interface IAuthDto {
 
 export interface IUser{
     id: string;
-    email: string;
-    role: string;
+    email?: string;
+    role?: string;
+    name?: string;
+    surname?: string;
 }
 
 export interface IAuthState{
     user: IUser | null;
-    setUser: (user: IUser | null) => void;
+    setUser: (user: AxiosResponse<any>) => void;
 }
