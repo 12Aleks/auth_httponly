@@ -7,10 +7,11 @@ export interface IAuthDto {
 
 export interface IUser{
     id: string;
-    email?: string;
-    role?: string;
-    name?: string;
+    email: string;
+    role: string;
+    name: string;
     surname?: string;
+    password: string;
 }
 
 export interface IAuthState{
