@@ -1,9 +1,10 @@
-import {IAuthDto} from "@/app/utils/types";
+
 import {api} from "@/app/api/axiosInitial";
+import {ILoginDto, IRegisterDto} from "@/app/lib/zodSchema";
 
 
 export const authApi = {
-    login: async (dto: IAuthDto) => {
+    login: async (dto: ILoginDto) => {
         const res = await api.post('/auth/login', dto);
         return res;
     },
@@ -11,10 +12,9 @@ export const authApi = {
         const res = await api.post('/auth/logout');
         return res;
     },
-    register: async (dto: IAuthDto, role: string = 'user') => {
+    register: async (dto: IRegisterDto) => {
         const res = await api.post('/auth/register', {
-            ...dto,
-            role
+            ...dto
         });
         return res;
     },

@@ -3,12 +3,13 @@ import {useAuthStore} from "@/app/store/authStore";
 import {IAuthDto} from "@/app/utils/types";
 import {authApi} from "@/app/api/authApi";
 import Unauthorized from "next/dist/client/components/builtin/unauthorized";
+import {ILoginDto, IRegisterDto} from "@/app/lib/zodSchema";
 
 
 export function useAuth() {
   const {user, setUser}  =  useAuthStore();
 
-  const login = async (dto : IAuthDto) => {
+  const login = async (dto : ILoginDto) => {
       await authApi.login(dto);
 
       const user = await authApi.isLogin();
@@ -23,7 +24,7 @@ export function useAuth() {
       await authApi.logout();
   }
 
-  const register = async (dto: IAuthDto) => {
+  const register = async (dto: IRegisterDto) => {
       await authApi.register(dto);
   }
 

@@ -5,6 +5,8 @@ export const authSchema = z.object({
     password: z.string().min(6, 'Password must be at least 6 characters long.')
 });
 
+export type ILoginDto = z.infer<typeof authSchema>;
+
 export const registerSchema = authSchema.extend({
     email: z.string().email('Invalid email address.'),
     role: z.string().default('user'),
@@ -12,3 +14,5 @@ export const registerSchema = authSchema.extend({
     surname: z.string(),
     password: z.string().min(6, 'Password must be at least 6 characters long.')
 });
+
+export type IRegisterDto = z.infer<typeof registerSchema>;
