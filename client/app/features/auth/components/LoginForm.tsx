@@ -20,12 +20,13 @@ export default function LoginForm() {
     };
 
     return (
-        <Form action={onSubmit} className="flex flex-col gap-5 w-64 border border-amber-50 p-5 rounded-xl">
+        <Form action={onSubmit} className="flex flex-col gap-5 w-64 border border-amber-50 p-5 rounded-xl
+        [&_input]:p-1 [&_input]:rounded [&_input]:bg-white
+        ">
             <input
                 type="email"
                 name="email"
                 placeholder="Email"
-                className="border p-2 rounded"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
             />
@@ -34,7 +35,6 @@ export default function LoginForm() {
                 type="password"
                 name="password"
                 placeholder="Password"
-                className="border p-2 rounded"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
             />
