@@ -7,19 +7,21 @@ const Logout = () => {
     const { user, logout } = useAuth();
     const router = useRouter();
 
-
     useEffect(() => {
         if (!user) router.push("/login");
     }, [user, router]);
 
     if (!user) return null;
 
+    const logOut = async () => {
+        await logout();
+        router.push("/login");
+    }
+
     return (
-        <div>
-            <button onClick={logout} className="mt-4 bg-red-500 text-white p-2 rounded">
-                Выйти
+            <button onClick={logOut} className="rounded-md bg-neutral-600/50 hover:bg-neutral-500/50 duration-200 px-3 py-2 text-sm font-medium text-white cursor-pointer">
+                Logout
             </button>
-        </div>
     );
 };
 

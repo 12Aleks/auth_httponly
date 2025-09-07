@@ -54,10 +54,7 @@ const RegistrationForm = () => {
 
             {errors.message && <p className="text-red-600 font-medium">{errors.message}</p>}
 
-            <button
-                type="submit"
-                className="bg-blue-500 hover:bg-blue-700 duration-200 text-white px-4 py-2 rounded"
-            >
+            <button type="submit" className="bg-blue-500 hover:bg-blue-700 duration-200 text-white px-4 py-2 rounded">
                 Register
             </button>
         </Form>

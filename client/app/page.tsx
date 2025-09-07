@@ -1,5 +1,6 @@
 import AboutUser from "@/app/features/auth/components/AboutUser";
-import Header from "@/app/components/header";
+import Header from "@/app/components/Header";
+import Footer from "@/app/components/Footer";
 
 export default function Home() {
     return (
@@ -11,9 +12,7 @@ export default function Home() {
                 </div>
 
             </main>
-            <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-                Footer
-            </footer>
+            <Footer/>
         </div>
     );
 }
