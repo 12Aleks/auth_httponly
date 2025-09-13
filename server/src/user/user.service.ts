@@ -4,6 +4,8 @@ import {User} from "./entity/user.entity";
 import {UserLoginDto} from "./dto/user.dto";
 import {Repository} from "typeorm";
 import * as bcrypt from 'bcrypt';
+import { RequestWithUser } from './user.controller';
+import { when } from 'joi';
 
 @Injectable()
 export class UserService {
@@ -35,5 +37,9 @@ export class UserService {
         return this.userRepository.find();
     }
 
+    async getUserProfile(user: RequestWithUser["user"]): Promise<User | null> {
+      if (!user) return null;
+      return this.userRepository.findOne({ where: { id: user.sub } });
+    }
 
 }

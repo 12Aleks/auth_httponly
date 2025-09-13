@@ -7,14 +7,25 @@ export const api = axios.create({
     withCredentials: true
 });
 
+let isRefreshing = false;
+
 api.interceptors.response.use(
     res => res.data,
     async (error) => {
-        // можно обработать 401, например разлогинить пользователя
-        if (error.response?.status === 401) {
-            // например, вызвать logout или редирект на страницу логина
-            console.log("Unauthorized!");
+        const originalRequest = error.config;
+        if (error.response?.status === 401 && !originalRequest._retry) {
+            if (!isRefreshing) {
+                isRefreshing = true;
+                try {
+                    await api.post("/auth/refresh");
+                    isRefreshing = false;
+                    originalRequest._retry = true;
+                    return api(originalRequest); // повторяем запрос
+                } catch (e) {
+                    isRefreshing = false;
+                    console.log("Refresh failed, redirect to login");
+                }
+            }
         }
-        return Promise.reject(error); // 🔑 обязательно пробрасываем ошибку дальше
     }
 );

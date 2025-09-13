@@ -12,9 +12,17 @@ export interface IUser{
     name: string;
     surname: string;
     password: string;
+    isActive: boolean;
+    createdAt: string;
+    updatedAt: string;
 }
 
 export interface IAuthState{
     user: IUser | null;
-    setUser: (user: AxiosResponse<any>) => void;
+    setUser: (user: IUser) => void;
+}
+
+export interface IStatus{
+    message: string,
+    isAuth: boolean
 }

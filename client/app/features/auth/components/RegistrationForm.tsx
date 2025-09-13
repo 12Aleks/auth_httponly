@@ -21,14 +21,17 @@ const RegistrationForm = () => {
             const fieldErrors = Object.fromEntries(
                 Object.entries(res.error.flatten().fieldErrors).map(([k, v]) => [k, v?.[0]])
             ) as FormErrors<IRegisterDto>;
-
             setErrors({ ...fieldErrors, message: "Validation failed" });
             return;
         }
 
         setErrors({});
         const data = res.data;
-        console.log("✅ Valid data:", data);
+
+
+
+
+
         router.push("/");
     };
 

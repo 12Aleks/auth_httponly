@@ -1,4 +1,4 @@
-import {Body, Controller, Post, Res} from '@nestjs/common';
+import { Body, Controller, Post, Req, Res } from '@nestjs/common';
 import type { Response, Request } from 'express';
 import {AuthService} from "./auth.service";
 import {AuthDto} from "./dto/auth.dto";
@@ -28,18 +28,19 @@ export class AuthController {
             maxAge: 7 * 24 * 60 * 60 * 1000,
         })
 
-        res.send({message: 'Login successful'});
+        res.send({message: 'Login successful', isAuth: true});
     }
 
     @Post('logout')
     async logout(@Res() res: Response) {
         res.clearCookie('accessToken');
         res.clearCookie('refreshToken');
-        res.send({message: 'Logout successful'});
+        res.send({message: 'Logout successful', isAuth: true});
     }
 
-    async refreshToken(@Body() dto: AuthDto, @Res() res: Response) {
-        const refresh = res.cookie['refreshToken'];
+    @Post('refresh')
+    async refreshToken(@Body() dto: AuthDto, @Res() @Req() req: Request, @Res() res: Response) {
+        const refresh = req.cookies['refreshToken'];
         if (!refresh) return res.status(401).send({ message: 'No refresh token' });
 
         const tokens = await this.authService.refreshToken(refresh);
@@ -47,7 +48,7 @@ export class AuthController {
         res.cookie('accessToken', tokens.accessToken, {
             httpOnly: true,
             secure: false, // true, but in the test version false
-            sameSite: 'strict',
+            sameSite: 'lax',
             maxAge: 15 * 60 * 1000,
         });
 
