@@ -8,8 +8,7 @@ export const api = axios.create({
 });
 
 let isRefreshing = false;
-
-api.interceptors.response.use(
+   api.interceptors.response.use(
     res => res.data,
     async (error) => {
         const originalRequest = error.config;

@@ -1,4 +1,4 @@
-import { Body, Controller, Post, Req, Res } from '@nestjs/common';
+import { Body, Controller, Get, Post, Req, Res } from '@nestjs/common';
 import type { Response, Request } from 'express';
 import {AuthService} from "./auth.service";
 import {AuthDto} from "./dto/auth.dto";
@@ -16,14 +16,14 @@ export class AuthController {
 
         res.cookie('accessToken', token.accessToken, {
             httpOnly: true,
-            sameSite: 'lax',
+            sameSite: 'none',
             secure: false, // true, but in the test version false
             maxAge: 15 * 60 * 1000,
         });
 
         res.cookie('refreshToken', token.refreshToken, {
             httpOnly: true,
-            sameSite: 'lax',
+            sameSite: 'none',
             secure: false, // true, but in the test version false
             maxAge: 7 * 24 * 60 * 60 * 1000,
         })
@@ -38,22 +38,22 @@ export class AuthController {
         res.send({message: 'Logout successful', isAuth: true});
     }
 
+
     @Post('refresh')
-    async refreshToken(@Body() dto: AuthDto, @Res() @Req() req: Request, @Res() res: Response) {
-        const refresh = req.cookies['refreshToken'];
-        if (!refresh) return res.status(401).send({ message: 'No refresh token' });
+    async refreshToken(@Req() req: Request, @Res() res: Response) {
+      const refresh = req.cookies['refreshToken'];
+      if (!refresh) return res.status(401).send({ message: 'No refresh token' });
 
-        const tokens = await this.authService.refreshToken(refresh);
+      const tokens = await this.authService.refreshToken(refresh);
 
-        res.cookie('accessToken', tokens.accessToken, {
-            httpOnly: true,
-            secure: false, // true, but in the test version false
-            sameSite: 'lax',
-            maxAge: 15 * 60 * 1000,
-        });
+      res.cookie('accessToken', tokens.accessToken, {
+       httpOnly: true,
+       secure: false,
+        sameSite: 'none',
+       maxAge: 15 * 60 * 1000,
+      });
 
-        res.send({ message: 'Access token refreshed' });
-
+     res.send({ message: 'Access token refreshed', isAuth: true });
     }
 
 }

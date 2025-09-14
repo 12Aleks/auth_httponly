@@ -19,6 +19,7 @@ export const authApi = {
     },
     isLogin: async ():Promise<IUser> => {
         const res = await api.get('/users/profile');
+        console.log('isLogin', res);
         return res.data;
     }
 }

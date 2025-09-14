@@ -38,8 +38,12 @@ export class UserService {
     }
 
     async getUserProfile(user: RequestWithUser["user"]): Promise<User | null> {
+      console.log('user', user);
       if (!user) return null;
-      return this.userRepository.findOne({ where: { id: user.sub } });
+      return this.userRepository.findOne(
+        { where: { id: user.sub },
+        select: ['id', 'name', 'surname', 'email', 'role', 'isActive'],
+        });
     }
 
 }

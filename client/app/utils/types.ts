@@ -11,10 +11,10 @@ export interface IUser{
     role: string;
     name: string;
     surname: string;
-    password: string;
-    isActive: boolean;
-    createdAt: string;
-    updatedAt: string;
+    password?: string;
+    isActive?: boolean;
+    createdAt?: string;
+    updatedAt?: string;
 }
 
 export interface IAuthState{

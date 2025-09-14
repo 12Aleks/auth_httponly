@@ -34,9 +34,11 @@ export class UserController {
     @UseGuards(JwtAuthGuard, RolesGuard)
     @Get('profile')
     async profile(@Req() req: RequestWithUser) {
-            if (!req.user) {
+
+            if (!req.user?.sub) {
                 return { message: 'User not authenticated' };
             }
+
             return await this.userService.getUserProfile(req.user);
     }
 }
