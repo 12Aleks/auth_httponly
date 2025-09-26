@@ -16,14 +16,14 @@ export class AuthController {
 
         res.cookie('accessToken', token.accessToken, {
             httpOnly: true,
-            sameSite: 'none',
+            sameSite: 'lax',
             secure: false, // true, but in the test version false
             maxAge: 15 * 60 * 1000,
         });
 
         res.cookie('refreshToken', token.refreshToken, {
             httpOnly: true,
-            sameSite: 'none',
+            sameSite: 'lax',
             secure: false, // true, but in the test version false
             maxAge: 7 * 24 * 60 * 60 * 1000,
         })
@@ -49,7 +49,7 @@ export class AuthController {
       res.cookie('accessToken', tokens.accessToken, {
        httpOnly: true,
        secure: false,
-        sameSite: 'none',
+       sameSite: 'lax',
        maxAge: 15 * 60 * 1000,
       });
 

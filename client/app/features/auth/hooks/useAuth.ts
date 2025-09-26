@@ -10,13 +10,14 @@ export function useAuth() {
   const {user, setUser}  =  useAuthStore();
 
   const login = async (dto : ILoginDto) => {
-      const data = await authApi.login(dto);
+      const   data  = await authApi.login(dto);
+      console.log('useAuth', data);
 
       if (!data.isAuth) return;
 
       const user = await authApi.isLogin();
 
-      console.log('useAuth', user);
+      console.log('useAuth2', user);
 
       if(!user) return Unauthorized();
 

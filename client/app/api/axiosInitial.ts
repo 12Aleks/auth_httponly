@@ -9,7 +9,7 @@ export const api = axios.create({
 
 let isRefreshing = false;
    api.interceptors.response.use(
-    res => res.data,
+    res => res,
     async (error) => {
         const originalRequest = error.config;
         if (error.response?.status === 401 && !originalRequest._retry) {

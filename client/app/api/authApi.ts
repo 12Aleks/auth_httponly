@@ -6,10 +6,12 @@ import {IStatus, IUser} from "@/app/utils/types";
 
 export const authApi = {
     login: async (dto: ILoginDto): Promise<IStatus> => {
-        return api.post('/auth/login', dto);
+       const res = await api.post('/auth/login', dto);
+       if(!res?.data?.isAuth) return {message: 'Invalid email or password', isAuth: false}
+       return res?.data
     },
     logout: async (): Promise<IStatus> => {
-        return api.post('/auth/logout');
+        return await api.post('/auth/logout');
     },
     register: async (dto: IRegisterDto):Promise<IUser> => {
         const res = await api.post('/auth/register', {
@@ -19,7 +21,6 @@ export const authApi = {
     },
     isLogin: async ():Promise<IUser> => {
         const res = await api.get('/users/profile');
-        console.log('isLogin', res);
-        return res.data;
+        return res?.data;
     }
 }

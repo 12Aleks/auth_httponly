@@ -16,6 +16,7 @@ export default function LoginForm() {
         const email = formData.get("email") as string;
         const password = formData.get("password") as string
         await login({email, password});
+        console.log('login', email, password);
         router.push("/");
     };
 
