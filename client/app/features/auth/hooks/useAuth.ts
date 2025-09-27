@@ -1,6 +1,5 @@
 "use client"
 import {useAuthStore} from "@/app/store/authStore";
-import {IAuthDto} from "@/app/utils/types";
 import {authApi} from "@/app/api/authApi";
 import Unauthorized from "next/dist/client/components/builtin/unauthorized";
 import {ILoginDto, IRegisterDto} from "@/app/lib/zodSchema";
@@ -11,16 +10,11 @@ export function useAuth() {
 
   const login = async (dto : ILoginDto) => {
       const   data  = await authApi.login(dto);
-      console.log('useAuth', data);
 
-      if (!data.isAuth) return;
-
+      if (!data.isAuth) return Unauthorized();
       const user = await authApi.isLogin();
 
-      console.log('useAuth2', user);
-
       if(!user) return Unauthorized();
-
       setUser(user);
   }
 

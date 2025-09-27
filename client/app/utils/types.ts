@@ -1,9 +1,4 @@
-import {AxiosResponse} from "axios";
 
-export interface IAuthDto {
-    email: string,
-    password: string
-}
 
 export interface IUser{
     id: string;

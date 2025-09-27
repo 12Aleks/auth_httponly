@@ -1,7 +1,7 @@
 import { Body, Controller, Get, Post, Req, Res } from '@nestjs/common';
 import type { Response, Request } from 'express';
 import {AuthService} from "./auth.service";
-import {AuthDto} from "./dto/auth.dto";
+import {AuthDto, RegisterDto} from "./dto/auth.dto";
 
 @Controller('auth')
 export class AuthController {
@@ -54,6 +54,11 @@ export class AuthController {
       });
 
      res.send({ message: 'Access token refreshed', isAuth: true });
+    }
+
+    @Post("registration")
+    async registration(dto: RegisterDto) {
+
     }
 
 }

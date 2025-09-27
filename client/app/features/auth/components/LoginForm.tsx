@@ -1,48 +1,46 @@
 "use client"
-import { useState } from "react";
+
 import { useRouter } from "next/navigation";
 import { useAuth } from "../hooks/useAuth";
-import Form from "next/form";
+import {useForm} from "react-hook-form";
+import {authSchema, ILoginDto} from "@/app/lib/zodSchema";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 
 
 export default function LoginForm() {
     const { login } = useAuth();
     const router = useRouter();
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
 
-    const onSubmit = async (formData: FormData) => {
-        const email = formData.get("email") as string;
-        const password = formData.get("password") as string
-        await login({email, password});
-        console.log('login', email, password);
+    const {register, handleSubmit,  formState: { errors, isSubmitting }} = useForm<ILoginDto>({
+        resolver: zodResolver(authSchema),
+    });
+
+    const onSubmit = async (data: ILoginDto) => {
+        await login(data);
         router.push("/");
     };
 
     return (
-        <Form action={onSubmit} className="flex flex-col gap-5 w-64 border border-amber-50 p-5 rounded-xl
+        <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-5 w-64 border border-amber-50 p-5 rounded-xl
         [&_input]:p-1 [&_input]:rounded [&_input]:bg-white
         ">
             <input
                 type="email"
-                name="email"
                 placeholder="Email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                {...register("email")}
             />
-
+            {errors.email && <p className="text-red-500 pt-1 m-0 text-sm">{errors.email.message}</p>}
             <input
                 type="password"
-                name="password"
                 placeholder="Password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
+                {...register("password")}
             />
+            {errors.password && (<p className="text-red-500 pt-1 m-0 text-sm">{errors.password.message}</p>)}
 
-            <button className="bg-blue-500 text-white p-2 rounded cursor-pointer" type="submit">
-                Login
+            <button className="bg-blue-500 hover:bg-blue-700 duration-200 text-white p-2 rounded cursor-pointer" type="submit">
+                {isSubmitting ? "Logging in..." : "Login"}
             </button>
-        </Form>
+        </form>
     );
 }
