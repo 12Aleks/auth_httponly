@@ -4,38 +4,17 @@ import { IRegisterDto, registerSchema } from "@/app/lib/zodSchema";
 import {useRouter} from "next/navigation";
 import {useForm} from "react-hook-form";
 import {zodResolver} from "@hookform/resolvers/zod";
+import {useAuth} from "@/app/features/auth/hooks/useAuth";
 
 const RegistrationForm = () => {
+    const {registration} = useAuth()
     const router = useRouter();
     const {register, handleSubmit, formState: {errors, isSubmitting}} = useForm<IRegisterDto>({
         resolver: zodResolver(registerSchema)
     })
 
-    // const createUser = async (formData: FormData) => {
-    //     const rawData = Object.fromEntries(formData.entries());
-    //
-    //     // zod validation
-    //     const res = registerSchema.safeParse(rawData);
-    //
-    //     if (!res.success) {
-    //         // собрать ошибки
-    //         const fieldErrors = Object.fromEntries(
-    //             Object.entries(res.error.flatten().fieldErrors).map(([k, v]) => [k, v?.[0]])
-    //         ) as FormErrors<IRegisterDto>;
-    //         setErrors({ ...fieldErrors, message: "Validation failed" });
-    //         return;
-    //     }
-    //
-    //     setErrors({});
-    //     const data = res.data;
-    //
-    //
-    //     router.push("/");
-    // };
-
-    const createUser = async () => {
-
-
+    const createUser = async (data: IRegisterDto) => {
+        await registration(data)
         router.push("/");
     }
 

@@ -22,9 +22,9 @@ export function useAuth() {
       await authApi.logout();
   }
 
-  const register = async (dto: IRegisterDto) => {
+  const registration = async (dto: IRegisterDto) => {
       await authApi.register(dto);
   }
 
-  return {user, login, logout, register};
+  return {user, login, logout, registration};
 }

@@ -10,7 +10,6 @@ export default function Home() {
                 <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-[calc(100vh-6rem)] p-8 pb-20 gap-16 sm:p-20">
                     <AboutUser/>
                 </div>
-
             </main>
             <Footer/>
         </div>
