@@ -1,4 +1,4 @@
-import AboutUser from "@/app/features/auth/components/AboutUser";
+import AboutUser from "@/app/features/user/components/AboutUser";
 import Header from "@/app/components/Header";
 import Footer from "@/app/components/Footer";
 

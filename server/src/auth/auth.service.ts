@@ -38,8 +38,9 @@ export class AuthService {
           expiresIn: '1h'});
         const refreshToken = await this.jwtService.signAsync(userPayload, {
           expiresIn: '7d'});
+        const csrfToken = await this.jwtService.signAsync({ ...userPayload, random: Math.random()} , {expiresIn: '1d'})
 
-        return {accessToken, refreshToken};
+        return {accessToken, refreshToken, csrfToken};
     }
 
     async refreshToken(refreshToken: string){

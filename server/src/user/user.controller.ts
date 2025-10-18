@@ -5,6 +5,7 @@ import {RolesGuard} from "../auth/guards/roles.guard";
 import {JwtAuthGuard} from "../auth/guards/jwt-auth.guard";
 import {Roles} from "../auth/decorators/roles.decorator";
 import { User } from './entity/user.entity';
+import {CsrfGuard} from "../auth/guards/csrf.guard";
 
 export interface RequestWithUser extends Request {
     user?: {
@@ -24,14 +25,14 @@ export class UserController {
     }
 
     @Roles('admin')
-    @UseGuards(JwtAuthGuard, RolesGuard)
+    @UseGuards(JwtAuthGuard, RolesGuard, CsrfGuard)
     @Get()
     async getUsers() {
         return await this.userService.getAllUsers();
     }
 
     @Roles('admin', 'user')
-    @UseGuards(JwtAuthGuard, RolesGuard)
+    @UseGuards(JwtAuthGuard, RolesGuard, CsrfGuard)
     @Get('profile')
     async profile(@Req() req: RequestWithUser) {
 

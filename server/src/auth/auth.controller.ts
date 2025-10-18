@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post, Req, Res } from '@nestjs/common';
+import { Body, Controller, Post, Req, Res } from '@nestjs/common';
 import type { Response, Request } from 'express';
 import {AuthService} from "./auth.service";
 import {AuthDto, RegisterDto} from "./dto/auth.dto";
@@ -26,6 +26,14 @@ export class AuthController {
             sameSite: 'lax',
             secure: false, // true, but in the test version false
             maxAge: 7 * 24 * 60 * 60 * 1000,
+        });
+
+        // CSRF cookies
+        res.cookie("csrfToken", token.csrfToken, {
+            httpOnly: false,
+            sameSite: 'strict',
+            secure: false,
+            maxAge: 15 * 60 * 1000,
         })
 
         res.send({message: 'Login successful', isAuth: true});
