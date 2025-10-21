@@ -1,11 +1,10 @@
-import React from 'react';
 import {IUser} from "@/app/utils/types";
 
 const TableComponent = (user : IUser) => {
     return (
-        <table className="table-auto min-w-full border border-white rounded-lg overflow-hidden ">
-            <thead>
-            <tr>
+        <table className="table-auto min-w-full border-1 border-white rounded-lg overflow-hidden ">
+            <thead >
+            <tr  className="border border-white">
                 <th className="border border-white px-4 py-2 text-left">Name</th>
                 <th className="border border-white px-4 py-2 text-left">Surname</th>
                 <th className="border border-white px-4 py-2 text-left">Role</th>

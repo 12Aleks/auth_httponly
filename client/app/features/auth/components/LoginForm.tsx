@@ -23,7 +23,7 @@ export default function LoginForm() {
 
     return (
         <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-5 w-64 border border-amber-50 p-5 rounded-xl
-        [&_input]:p-1 [&_input]:rounded [&_input]:bg-white
+        [&_input]:p-1 [&_input]:rounded [&_input]:bg-white [&_input]:text-black
         ">
             <input
                 type="email"

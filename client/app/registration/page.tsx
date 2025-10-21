@@ -1,7 +1,5 @@
-import React from 'react';
 import RegistrationForm from "@/app/features/auth/components/RegistrationForm";
-import Link from "next/link";
-import FormBurron from "@/app/features/auth/components/FormBurron";
+import FormButton from "@/app/features/auth/components/FormButton";
 
 const Page = () => {
     return (
@@ -9,7 +7,7 @@ const Page = () => {
             <h1>Registration form</h1>
             <RegistrationForm />
             or
-            <FormBurron text={'login'}/>
+            <FormButton text={'login'}/>
         </div>
 
     );

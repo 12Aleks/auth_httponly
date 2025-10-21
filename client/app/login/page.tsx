@@ -1,6 +1,6 @@
 import LoginForm from "@/app/features/auth/components/LoginForm";
 import Link from "next/link";
-import FormBurron from "@/app/features/auth/components/FormBurron";
+import FormButton from "@/app/features/auth/components/FormButton";
 
 const LoginPage = () => {
     return (
@@ -9,7 +9,7 @@ const LoginPage = () => {
             <p>This is the login page.</p>
             <LoginForm />
             or
-            <FormBurron text={'registration'}/>
+            <FormButton text={'registration'}/>
         </div>
     );
 };
